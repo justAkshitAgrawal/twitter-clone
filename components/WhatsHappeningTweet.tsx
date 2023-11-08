@@ -5,6 +5,7 @@ import { Avatar, Button } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 import { FaImage } from "react-icons/fa";
@@ -17,6 +18,8 @@ const WhatsHappeningTweet = ({
 }) => {
   const [tweet, setTweet] = useState("");
 
+  const router = useRouter();
+
   const { mutate: postTweet, isPending } = useMutation({
     mutationFn: async ({ tweet }: PostType) => {
       const payload: PostType = { tweet };
@@ -26,6 +29,7 @@ const WhatsHappeningTweet = ({
     },
     onSuccess: () => {
       setTweet("");
+      router.refresh();
     },
   });
 

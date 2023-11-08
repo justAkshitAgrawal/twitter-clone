@@ -1,6 +1,8 @@
 import prisma from "@/lib/db";
 import React from "react";
 import Tweet from "./Tweet";
+import { isLoggedIn } from "@/lib/auth";
+import FeedAnimateProvider from "./FeedAnimateProvider";
 
 const Feed = async () => {
   const posts = await prisma.post.findMany({
@@ -9,20 +11,25 @@ const Feed = async () => {
         select: {
           name: true,
           image: true,
+          id: true,
         },
       },
+      likes: true,
     },
     orderBy: {
       createdAt: "desc",
     },
   });
 
+  const session = await isLoggedIn();
+
   return (
-    <div className="mt-10 grid grid-cols-1 gap-10">
+    <FeedAnimateProvider>
       {posts?.map((post) => (
-        <Tweet post={post} key={post.id} />
+        // @ts-ignore
+        <Tweet post={post} key={post.id} userId={session?.user?.id!} />
       ))}
-    </div>
+    </FeedAnimateProvider>
   );
 };
 

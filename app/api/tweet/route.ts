@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { tweet } = PostValidator.parse(body);
+    const { tweet, retweetedFrom } = PostValidator.parse(body);
     const session = await isLoggedIn();
 
     if (!session) {
@@ -21,13 +21,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await prisma.post.create({
-      data: {
-        content: tweet,
-        likes: 0,
-        authorId: session.user!.id,
-      },
-    });
+    if (retweetedFrom) {
+      await prisma.post.create({
+        data: {
+          content: tweet,
+          // @ts-ignore
+          authorId: session.user!.id,
+          retweetedFrom: retweetedFrom,
+        },
+      });
+    } else {
+      await prisma.post.create({
+        data: {
+          content: tweet,
+          // @ts-ignore
+          authorId: session.user!.id,
+        },
+      });
+    }
 
     return NextResponse.json(
       {
