@@ -4,7 +4,7 @@ import WhatsHappening from "@/components/WhatsHappening";
 
 const Home = () => {
   return (
-    <div className="flex">
+    <div className="flex w-[70vw]">
       <div>
         <WhatsHappening />
         <div className="mt-10">

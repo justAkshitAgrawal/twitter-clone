@@ -32,6 +32,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    await prisma.like.deleteMany({
+      where: {
+        postId,
+      },
+    });
+
+    await prisma.savedPost.deleteMany({
+      where: {
+        postId,
+      },
+    });
+
     await prisma.post.delete({
       where: {
         id: postId,
@@ -41,10 +53,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
       {
-        error: "Something went wrong",
+        error: error.message,
       },
       {
         status: 500,

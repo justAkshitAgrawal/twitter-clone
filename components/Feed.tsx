@@ -4,6 +4,8 @@ import Tweet from "./Tweet";
 import { isLoggedIn } from "@/lib/auth";
 import FeedAnimateProvider from "./FeedAnimateProvider";
 
+export const revalidate = 1;
+
 const Feed = async () => {
   const posts = await prisma.post.findMany({
     include: {
@@ -15,6 +17,12 @@ const Feed = async () => {
         },
       },
       likes: true,
+      savedBy: {
+        select: {
+          userId: true,
+          postId: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",

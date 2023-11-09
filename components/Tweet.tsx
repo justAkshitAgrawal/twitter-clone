@@ -2,10 +2,10 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { formatTimeToNow } from "@/lib/utils";
 import { Avatar } from "@nextui-org/react";
 import { Like, Post } from "@prisma/client";
-import { BsBookmark } from "react-icons/bs";
 import TweetLike from "./TweetLike";
 import Retweet from "./Retweet";
 import DeleteTweet from "./DeleteTweet";
+import SaveTweet from "./SaveTweet";
 
 const Tweet = ({
   post,
@@ -18,6 +18,10 @@ const Tweet = ({
       id: string;
     };
     likes: Like[];
+    savedBy: {
+      userId: string;
+      postId: string;
+    }[];
   };
   userId?: string;
 }) => {
@@ -55,10 +59,7 @@ const Tweet = ({
 
         {post.author.id === userId ? null : <Retweet post={post} />}
 
-        <div className="cursor-pointer flex items-center space-x-2 dark:text-white dark:hover:text-purple-500">
-          <BsBookmark className="h-5 w-5" />
-          <p className=" text-sm">Bookmark</p>
-        </div>
+        <SaveTweet post={post} userId={userId} />
 
         <div>{post.author.id === userId && <DeleteTweet post={post} />}</div>
       </div>

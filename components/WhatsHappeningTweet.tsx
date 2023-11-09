@@ -68,7 +68,7 @@ const WhatsHappeningTweet = ({
         </div>
 
         <Button
-          startContent={<LuTwitter className="fill-white" />}
+          startContent={!isPending && <LuTwitter className="fill-white" />}
           color="primary"
           variant="shadow"
           onClick={() => postTweet({ tweet })}

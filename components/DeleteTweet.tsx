@@ -27,7 +27,7 @@ const DeleteTweet = ({
     };
   };
 }) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const { mutate: deleteTweet, isPending } = useMutation({
     mutationFn: async () => {
@@ -38,6 +38,7 @@ const DeleteTweet = ({
     },
     onSuccess: () => {
       router.refresh();
+      onClose();
     },
   });
 

@@ -16,6 +16,8 @@ model User {
   updatedAt  DateTime    @updatedAt
   email      String      @unique
   name       String
+  bio        String?
+  username   String?     @unique
   image      String?
   posts      Post[]
   likedPosts Like[]

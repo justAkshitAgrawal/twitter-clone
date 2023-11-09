@@ -1,6 +1,6 @@
 "use client";
 
-import { AiFillBell, AiFillHome } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { BiSolidUser } from "react-icons/bi";
 import { usePathname } from "next/navigation";
