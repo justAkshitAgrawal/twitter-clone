@@ -1,10 +1,10 @@
 import prisma from "@/lib/db";
-import React from "react";
 import Tweet from "./Tweet";
 import { isLoggedIn } from "@/lib/auth";
 import FeedAnimateProvider from "./FeedAnimateProvider";
 
-export const revalidate = 1;
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const Feed = async () => {
   const posts = await prisma.post.findMany({

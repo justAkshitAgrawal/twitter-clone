@@ -1,7 +1,11 @@
 import Tweet from "@/components/Tweet";
 import { isLoggedIn } from "@/lib/auth";
 import prisma from "@/lib/db";
-import React from "react";
+import { Spinner } from "@nextui-org/react";
+import React, { Suspense } from "react";
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const BookmarksPage = async () => {
   const session = await isLoggedIn();
@@ -47,14 +51,22 @@ const BookmarksPage = async () => {
   return (
     <div className="w-[70vw]">
       <h3 className="p-10 text-2xl font-medium">Your Saved Tweets</h3>
-      <div className="grid grid-cols-2 gap-10 w-fit">
-        {posts?.map((post) => {
-          return (
-            // @ts-ignore
-            <Tweet post={post} key={post.id} userId={session?.user?.id!} />
-          );
-        })}
-      </div>
+      <Suspense
+        fallback={
+          <div className="flex justify-center w-[40vw] mt-10">
+            <Spinner color="current" size="lg" />
+          </div>
+        }
+      >
+        <div className="grid grid-cols-2 gap-10 w-fit">
+          {posts?.map((post) => {
+            return (
+              // @ts-ignore
+              <Tweet post={post} key={post.id} userId={session?.user?.id!} />
+            );
+          })}
+        </div>
+      </Suspense>
     </div>
   );
 };

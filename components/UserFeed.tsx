@@ -3,7 +3,8 @@ import prisma from "@/lib/db";
 import React from "react";
 import Tweet from "./Tweet";
 
-export const revalidate = 1;
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const UserFeed = async () => {
   const session = await isLoggedIn();

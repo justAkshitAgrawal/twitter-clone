@@ -47,6 +47,9 @@ const SaveTweet = ({
         router.refresh();
       }
     },
+    onSuccess: () => {
+      router.refresh();
+    },
   });
 
   return (

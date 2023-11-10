@@ -12,7 +12,7 @@ const WhomToFollow = async () => {
 
   return (
     <div className="mt-16">
-      <h1 className="ml-5 font-medium text-lg">{`Whom to Follow`}</h1>
+      <h1 className="ml-5 font-medium text-lg">{`Fellow Tweeters`}</h1>
       <div className="mt-5 grid grid-cols-1 gap-5">
         {users?.map((user) => {
           return (
@@ -28,9 +28,9 @@ const WhomToFollow = async () => {
                 </div>
               </div>
 
-              <Button color="primary" variant="ghost" size="sm">
-                Follow
-              </Button>
+              {/* <Button color="primary" variant="ghost" size="sm">
+                View
+              </Button> */}
             </div>
           );
         })}

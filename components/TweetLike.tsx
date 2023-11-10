@@ -3,6 +3,7 @@
 import { Like, Post } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
@@ -37,7 +38,12 @@ const TweetLike = ({
         });
       }
     },
+    onSuccess: () => {
+      router.refresh();
+    },
   });
+
+  const router = useRouter();
 
   return (
     <div
