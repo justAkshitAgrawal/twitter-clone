@@ -54,7 +54,7 @@ const Tweet = ({
           <h3>{post.content}</h3>
         </div>
       </div>
-      <div className="mt-10 flex gap-16">
+      <div className="mt-10 grid grid-cols-4">
         <TweetLike post={post} userId={userId} />
 
         {post.author.id === userId ? null : <Retweet post={post} />}

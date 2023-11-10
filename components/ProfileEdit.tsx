@@ -39,6 +39,8 @@ const ProfileEdit = ({
 
   const router = useRouter();
 
+  const usernameRegex = /^[a-z_][a-z0-9_.]{2,}[a-z]$/;
+
   const { mutate: updateProfile, isPending: isUpdatePending } = useMutation({
     mutationFn: async ({ username, bio }: ProfileType) => {
       const payload: ProfileType = {
@@ -63,6 +65,15 @@ const ProfileEdit = ({
     // @ts-ignore
     mutationFn: useDebouncedCallback(async (username: string) => {
       try {
+        if (!username) {
+          setUsernameAvailable(false);
+          return;
+        }
+
+        if (usernameRegex.test(username) === false) {
+          setUsernameAvailable(false);
+          return;
+        }
         const { data } = await axios.get(`/api/username/${username}`);
         setUsernameAvailable(data.available);
         if (username === uUsername) setUsernameAvailable(true);
@@ -109,10 +120,6 @@ const ProfileEdit = ({
                     value={username}
                     onChange={(e) => {
                       setUsername(e.target.value);
-                      if (!e.target.value) {
-                        setUsernameAvailable(false);
-                        return;
-                      }
                       checkUsername(e.target.value);
                     }}
                     label="Username"
@@ -126,6 +133,10 @@ const ProfileEdit = ({
                   label="Bio"
                   max={160}
                 />
+                <p className="text-xs text-white/60 px-2">
+                  Username should be at least 4 characters long and can only
+                  contain letters, numbers, underscores and periods.
+                </p>
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -145,7 +156,9 @@ const ProfileEdit = ({
                   onPress={() => {
                     updateProfile({ username, bio });
                   }}
-                  isDisabled={!usernameAvailable || !username}
+                  isDisabled={
+                    !usernameAvailable || !username || isUpdatePending
+                  }
                 >
                   Save
                 </Button>

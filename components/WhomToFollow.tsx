@@ -24,7 +24,7 @@ const WhomToFollow = async () => {
                 <Avatar src={user.image!} showFallback size="lg" />
                 <div className="flex flex-col">
                   <h1>{user.name}</h1>
-                  <h1 className="text-white/60 text-xs">{user.email}</h1>
+                  <h1 className="text-white/60 text-xs">@{user.username}</h1>
                 </div>
               </div>
 

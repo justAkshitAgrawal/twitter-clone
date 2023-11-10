@@ -13,6 +13,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Retweet = ({
   post,
@@ -35,6 +36,7 @@ const Retweet = ({
     },
     onSuccess: () => {
       setIsOpen(false);
+      toast.success("Retweeted!");
       router.refresh();
     },
   });
