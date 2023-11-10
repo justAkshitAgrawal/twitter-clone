@@ -18,6 +18,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import { toast } from "sonner";
 import { useDebouncedCallback } from "use-debounce";
 
 const ProfileEdit = ({
@@ -50,17 +51,25 @@ const ProfileEdit = ({
       return data;
     },
     onSuccess: () => {
+      toast.success("Profile updated!");
       router.refresh();
+    },
+    onError: () => {
+      toast.error("Error updating profile!");
     },
   });
 
   const { mutate: checkUsername, isPending: isCheckPending } = useMutation({
     // @ts-ignore
     mutationFn: useDebouncedCallback(async (username: string) => {
-      const { data } = await axios.get(`/api/username/${username}`);
-      setUsernameAvailable(data.available);
-      if (username === uUsername) setUsernameAvailable(true);
-      return data;
+      try {
+        const { data } = await axios.get(`/api/username/${username}`);
+        setUsernameAvailable(data.available);
+        if (username === uUsername) setUsernameAvailable(true);
+        return data;
+      } catch (error) {
+        setUsernameAvailable(false);
+      }
     }, 600),
   });
 

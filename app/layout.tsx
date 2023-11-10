@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font";
 import "./globals.css";
 import { Providers } from "./providers";
 import SideBar from "@/components/SideBar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +23,7 @@ export default function RootLayout({
             <SideBar />
             <div className="px-10">{children}</div>
           </div>
+          <Toaster closeButton />
         </Providers>
       </body>
     </html>

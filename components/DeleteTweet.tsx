@@ -15,6 +15,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const DeleteTweet = ({
   post,
@@ -37,8 +38,12 @@ const DeleteTweet = ({
       return data;
     },
     onSuccess: () => {
+      toast.success("Tweet deleted!");
       router.refresh();
       onClose();
+    },
+    onError: () => {
+      toast.error("Error deleting tweet!");
     },
   });
 

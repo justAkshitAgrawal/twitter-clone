@@ -10,6 +10,7 @@ import { useState } from "react";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 import { FaImage } from "react-icons/fa";
 import { LuTwitter } from "react-icons/lu";
+import { toast } from "sonner";
 
 const WhatsHappeningTweet = ({
   session,
@@ -29,7 +30,11 @@ const WhatsHappeningTweet = ({
     },
     onSuccess: () => {
       setTweet("");
+      toast.success("Tweet posted!");
       router.refresh();
+    },
+    onError: () => {
+      toast.error("Error posting tweet!");
     },
   });
 

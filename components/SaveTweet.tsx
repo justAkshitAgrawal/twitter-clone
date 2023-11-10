@@ -6,6 +6,7 @@ import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { toast } from "sonner";
 
 const SaveTweet = ({
   post,
@@ -48,7 +49,15 @@ const SaveTweet = ({
       }
     },
     onSuccess: () => {
+      if (!isSaved) {
+        toast.success("Tweet saved!");
+      } else {
+        toast.success("Tweet unsaved!");
+      }
       router.refresh();
+    },
+    onError: () => {
+      toast.error("Error saving tweet!");
     },
   });
 

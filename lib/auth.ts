@@ -1,6 +1,7 @@
 import { AuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "./db";
+import { nanoid } from "nanoid";
 
 export const authOptions: AuthOptions = {
   session: {
@@ -40,6 +41,7 @@ export const authOptions: AuthOptions = {
             email: token.email!,
             name: token.name!,
             image: token.picture!,
+            username: nanoid(8),
           },
         });
 

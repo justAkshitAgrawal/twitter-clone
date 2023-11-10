@@ -11,12 +11,6 @@ export const fetchCache = "force-no-store";
 const ProfilePage = async () => {
   const session = await isLoggedIn();
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session!.user?.email!,
-    },
-  });
-
   if (!session) {
     return (
       <div className="w-[70vw]">
@@ -24,6 +18,13 @@ const ProfilePage = async () => {
       </div>
     );
   }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session!.user?.email!,
+    },
+  });
+
   return (
     <div className="w-[70vw]">
       <div className="p-10 dark:bg-[#191d20] w-[40vw] rounded-3xl">
@@ -49,7 +50,7 @@ const ProfilePage = async () => {
           {/* Bio */}
           <p className="mt-4">{user?.bio}</p>
 
-          <hr className="h-px mt-10 bg-gray-200 border-0 dark:bg-gray-500" />
+          <hr className="h-px mt-5 rounded-full bg-gray-200 border-0 dark:bg-gray-500" />
         </div>
       </div>
       <Suspense
