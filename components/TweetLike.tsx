@@ -63,8 +63,11 @@ const TweetLike = ({
       ) : (
         <AiOutlineHeart className="h-5 w-5 text-red-500" />
       )}
-      <p className="text-red-500 text-sm">
-        {likeCount} {likeCount === 1 ? "Like" : "Likes"}
+      <p className="text-red-500 text-sm flex items-center gap-1 ">
+        {likeCount}{" "}
+        <span className="hidden sm:block">
+          {likeCount === 1 ? "Like" : "Likes"}
+        </span>
       </p>
     </div>
   );

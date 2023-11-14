@@ -17,7 +17,7 @@ model User {
   email      String      @unique
   name       String
   bio        String?
-  username   String?     @unique
+  username   String      @unique
   image      String?
   posts      Post[]
   likedPosts Like[]

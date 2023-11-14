@@ -49,7 +49,7 @@ const BookmarksPage = async () => {
   });
 
   return (
-    <div className="w-[70vw]">
+    <div className="sm:w-[70vw]">
       <h3 className="p-10 text-2xl font-medium">Your Saved Tweets</h3>
       <Suspense
         fallback={
@@ -58,7 +58,7 @@ const BookmarksPage = async () => {
           </div>
         }
       >
-        <div className="grid grid-cols-2 gap-10 w-fit">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {posts?.map((post) => {
             return (
               // @ts-ignore

@@ -7,7 +7,7 @@ import WhomToFollow from "./WhomToFollow";
 const RightSideBar = () => {
   return (
     <div className="flex flex-col w-[20vw]">
-      <div className="px-10 py-5 dark:bg-[#191d20] rounded-3xl flex items-center">
+      {/* <div className="px-10 py-5 dark:bg-[#191d20] rounded-3xl flex items-center">
         <input
           className=" bg-transparent outline-none pr-5"
           placeholder="Search"
@@ -19,7 +19,7 @@ const RightSideBar = () => {
           className="rounded-full "
           size="sm"
         />
-      </div>
+      </div> */}
       <WhatsTrending />
 
       <WhomToFollow />

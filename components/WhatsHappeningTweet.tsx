@@ -11,6 +11,7 @@ import { BsFillEmojiSmileFill } from "react-icons/bs";
 import { FaImage } from "react-icons/fa";
 import { LuTwitter } from "react-icons/lu";
 import { toast } from "sonner";
+import EmojiPicker from "emoji-picker-react";
 
 const WhatsHappeningTweet = ({
   session,
@@ -18,6 +19,7 @@ const WhatsHappeningTweet = ({
   session: Session | null | undefined;
 }) => {
   const [tweet, setTweet] = useState("");
+  const [showEmoji, setShowEmoji] = useState(false);
 
   const router = useRouter();
 
@@ -40,7 +42,7 @@ const WhatsHappeningTweet = ({
 
   return (
     <>
-      <div className="flex items-start gap-5 relative">
+      <div className="flex flex-col sm:flex-row items-start gap-5 relative">
         <div>
           <Avatar
             src={session?.user?.image!}
@@ -67,9 +69,23 @@ const WhatsHappeningTweet = ({
         {tweet.length} / 255
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <FaImage className="h-5 w-5" />
-          <BsFillEmojiSmileFill className="h-5 w-5" />
+        <div className="flex items-center gap-6 relative">
+          <FaImage className="h-5 w-5 cursor-not-allowed hidden sm:block" />
+          <BsFillEmojiSmileFill
+            onClick={() => {
+              setShowEmoji((prev) => !prev);
+            }}
+            className="h-5 w-5 cursor-pointer hidden sm:block"
+          />
+          {showEmoji && (
+            <div className="absolute top-10 z-50 left-10 ">
+              <EmojiPicker
+                onEmojiClick={(emojiData, e) => {
+                  setTweet((prev) => prev + emojiData.emoji);
+                }}
+              />
+            </div>
+          )}
         </div>
 
         <Button

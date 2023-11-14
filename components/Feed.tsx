@@ -14,6 +14,7 @@ const Feed = async () => {
           name: true,
           image: true,
           id: true,
+          username: true,
         },
       },
       likes: true,

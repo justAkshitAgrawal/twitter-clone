@@ -76,7 +76,7 @@ const SaveTweet = ({
       )}
 
       <p
-        className={`text-sm ${
+        className={`text-sm hidden sm:block ${
           isSavedState ? "text-purple-500" : "text-white/60"
         }`}
       >

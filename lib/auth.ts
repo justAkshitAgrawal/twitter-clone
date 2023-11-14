@@ -41,7 +41,7 @@ export const authOptions: AuthOptions = {
             email: token.email!,
             name: token.name!,
             image: token.picture!,
-            username: nanoid(8),
+            username: nanoid(8).toLowerCase(),
           },
         });
 

@@ -96,7 +96,12 @@ const ProfileEdit = ({
       >
         Edit
       </Button>
-      <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        backdrop="blur"
+        placement="center"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -119,6 +124,7 @@ const ProfileEdit = ({
                   <Input
                     value={username}
                     onChange={(e) => {
+                      setUsernameAvailable(false);
                       setUsername(e.target.value);
                       checkUsername(e.target.value);
                     }}

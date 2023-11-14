@@ -6,6 +6,7 @@ import TweetLike from "./TweetLike";
 import Retweet from "./Retweet";
 import DeleteTweet from "./DeleteTweet";
 import SaveTweet from "./SaveTweet";
+import Link from "next/link";
 
 const Tweet = ({
   post,
@@ -16,6 +17,7 @@ const Tweet = ({
       image: string | null;
       name: string;
       id: string;
+      username: string;
     };
     likes: Like[];
     savedBy: {
@@ -26,19 +28,31 @@ const Tweet = ({
   userId?: string;
 }) => {
   return (
-    <div className="p-10 dark:bg-[#191d20] rounded-3xl " key={post.id}>
+    <div
+      className="p-5 sm:p-10 dark:bg-[#191d20] rounded-3xl shadow-lg"
+      key={post.id}
+    >
       <div className="flex items-start gap-5">
         <Avatar
           src={post.author.image!}
-          className="cursor-pointer"
+          className="cursor-pointer hidden sm:block"
           showFallback
           size="lg"
         />
+        <Avatar
+          src={post.author.image!}
+          className="cursor-pointer sm:hidden"
+          showFallback
+          size="sm"
+        />
         <div className="flex-col flex gap-4">
           <div className="flex items-center gap-4">
-            <h3 className=" font-medium hover:underline cursor-pointer text-sm">
+            <Link
+              href={`/profile/${post.author.username}`}
+              className=" font-medium hover:underline cursor-pointer text-sm"
+            >
               {post.author.name}
-            </h3>
+            </Link>
             <h3 className="text-white/60 text-xs">
               {formatTimeToNow(post.createdAt)}
             </h3>
@@ -51,10 +65,11 @@ const Tweet = ({
               </h3>
             )}
           </div>
-          <h3>{post.content}</h3>
+          <h3 className="hidden sm:block">{post.content}</h3>
         </div>
       </div>
-      <div className="mt-10 grid grid-cols-4">
+      <h3 className="sm:hidden mt-4">{post.content}</h3>
+      <div className="mt-10 grid grid-cols-3 gap-x-2 place-items-start">
         <TweetLike post={post} userId={userId} />
 
         {post.author.id === userId ? null : <Retweet post={post} />}

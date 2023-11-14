@@ -31,7 +31,6 @@ const Retweet = ({
         tweet,
         retweetedFrom,
       };
-      console.log(payload);
       await axios.post("/api/tweet", payload);
     },
     onSuccess: () => {
@@ -56,7 +55,7 @@ const Retweet = ({
         <PopoverTrigger>
           <div className="cursor-pointer flex items-center space-x-2 dark:text-white dark:hover:text-green-400">
             <AiOutlineRetweet className="h-5 w-5" />
-            <p className=" text-sm">Retweet</p>
+            <p className=" text-sm hidden sm:block">Retweet</p>
           </div>
         </PopoverTrigger>
         <PopoverContent className="p-3 border border-zinc-600">

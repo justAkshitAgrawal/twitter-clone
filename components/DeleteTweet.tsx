@@ -56,9 +56,14 @@ const DeleteTweet = ({
         className="cursor-pointer flex items-center space-x-2 dark:text-white dark:hover:text-red-500"
       >
         <AiOutlineDelete className="h-5 w-5" />
-        <h3>Delete</h3>
+        <h3 className="hidden sm:block">Delete</h3>
       </div>
-      <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        backdrop="blur"
+        placement="center"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>

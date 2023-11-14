@@ -8,7 +8,7 @@ const WhatsTrending = async () => {
   );
 
   return (
-    <div className="mt-16 w-[20vw]">
+    <div className="mt-5 w-[20vw]">
       <h1 className="ml-5 font-medium text-lg">{`What's Trending`}</h1>
       <div className="mt-5 grid grid-cols-1 gap-5">
         {trendingPosts?.articles?.slice(0, 3).map((post: any) => {
@@ -17,7 +17,7 @@ const WhatsTrending = async () => {
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-5 dark:bg-[#191d20] rounded-3xl flex items-start gap-5"
+              className="p-5 dark:bg-[#191d20] rounded-3xl flex items-start gap-5 shadow-lg"
               key={post.author}
             >
               {post.urlToImage ? (

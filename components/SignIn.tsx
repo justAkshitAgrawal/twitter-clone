@@ -12,8 +12,8 @@ const SignIn = () => {
       }}
       className="flex flex-col items-center gap-1 cursor-pointer -ml-1 "
     >
-      <BiLogOutCircle className="h-8 w-8 rotate-180" />
-      <p className={`uppercase text-xs `}>Sign In</p>{" "}
+      <BiLogOutCircle className="sm:h-8 sm:w-8 h-7 w-7 rotate-180 text-white max-sm:text-black max-sm:dark:text-white" />
+      <p className={`uppercase text-xs hidden sm:block text-white`}>Sign In</p>{" "}
     </div>
   );
 };
