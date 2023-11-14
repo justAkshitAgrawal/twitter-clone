@@ -81,7 +81,7 @@ const ProfileEdit = ({
       } catch (error) {
         setUsernameAvailable(false);
       }
-    }, 600),
+    }, 300),
   });
 
   return (
